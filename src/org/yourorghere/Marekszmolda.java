@@ -81,23 +81,18 @@ public class Marekszmolda implements GLEventListener {
         gl.glMatrixMode(GL.GL_MODELVIEW);
         gl.glLoadIdentity();
     }
-   public void DisplayTriangleFan(float r, float xsr, float ysr, GL gl){
-         
-        
-            float x,y,kat;
-         gl.glBegin(GL.GL_TRIANGLE_FAN);
-         gl.glVertex3f(xsr,ysr,-6.0f); //?rodek
-          for(kat = 0.0f; kat < (2.0f*Math.PI);
-          kat+=(Math.PI/32.0f))
-          {
-
-         x = r*(float)Math.sin(kat)+xsr;
-         y = r*(float)Math.cos(kat)+ysr;
-          gl.glVertex3f(x, y, -6.0f); //kolejne punkty
-          }
-          gl.glEnd();
-         
-     }
+    
+    
+    public void drawTriangle(float x1, float x2,  float x3, float y1, float y2, float y3, float z, GL gl){
+    
+      gl.glBegin(GL.GL_TRIANGLES);
+         gl.glVertex3f(x3, y3, -6.0f);
+        gl.glVertex3f(x1, y1, -6.0f);
+        gl.glVertex3f(x2, y2, -6.0f);
+        gl.glEnd();
+ }
+    
+  
      public void display(GLAutoDrawable drawable) {
          GL gl = drawable.getGL();
  
@@ -106,9 +101,10 @@ public class Marekszmolda implements GLEventListener {
          // Reset the current matrix to the "identity"
          gl.glLoadIdentity();
                  
-         DisplayTriangleFan(1.0f , 0.0f , 0.0f, gl);
+        drawTriangle((float) 1.0, (float) 0.0, (float) 3.0, (float) 0.0, (float) 2.0, (float) 2.0, (float) -6.0, gl);
      
           // Flush all drawing operations to the graphics card
+        
           gl.glFlush();
       }
 
