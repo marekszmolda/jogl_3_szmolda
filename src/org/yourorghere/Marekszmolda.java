@@ -97,10 +97,10 @@ gl.glVertex3f( 0.0f,-1.0f, -6.0f);
 gl.glEnd();
 
 gl.glBegin(GL.GL_QUADS);
-gl.glVertex3f(1.5f, 1.0f, -6.0f);
-gl.glVertex3f(2.5f, 1.0f, -6.0f);
-gl.glVertex3f(2.5f,-1.0f, -6.0f);
-gl.glVertex3f(1.5f,-1.0f, -6.0f);
+gl.glVertex3f(1.5f, 1.0f, -10.0f);
+gl.glVertex3f(2.5f, 1.0f, -10.0f);
+gl.glVertex3f(2.5f,-1.0f, -10.0f);
+gl.glVertex3f(1.5f,-1.0f, -10.0f);
 
 gl.glEnd();
 
