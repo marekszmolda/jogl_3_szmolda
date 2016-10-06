@@ -91,16 +91,18 @@ public class Marekszmolda implements GLEventListener {
         gl.glLoadIdentity();
 
        gl.glBegin(GL.GL_TRIANGLES);
+       gl.glColor3f(1.0f,0.0f,0.0f);
 gl.glVertex3f(-1.0f, 1.0f, -6.0f);
 gl.glVertex3f(-2.0f,-1.0f, -6.0f);
 gl.glVertex3f( 0.0f,-1.0f, -6.0f);
 gl.glEnd();
 
 gl.glBegin(GL.GL_QUADS);
-gl.glVertex3f(1.5f, 1.0f, -10.0f);
-gl.glVertex3f(2.5f, 1.0f, -10.0f);
-gl.glVertex3f(2.5f,-1.0f, -10.0f);
-gl.glVertex3f(1.5f,-1.0f, -10.0f);
+gl.glColor3f(0.0f,0.2f,1.0f);
+gl.glVertex3f(1.5f, 1.0f, -6.0f);
+gl.glVertex3f(2.5f, 1.0f, -6.0f);
+gl.glVertex3f(2.5f,-1.0f, -6.0f);
+gl.glVertex3f(1.5f,-1.0f, -6.0f);
 
 gl.glEnd();
 
