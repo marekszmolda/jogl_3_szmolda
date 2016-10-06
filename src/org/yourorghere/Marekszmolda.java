@@ -90,16 +90,29 @@ public class Marekszmolda implements GLEventListener {
         // Reset the current matrix to the "identity"
         gl.glLoadIdentity();
 
-      float x,y,kat;
-gl.glBegin(GL.GL_TRIANGLE_FAN);
-gl.glVertex3f(0.0f,0.0f,-6.0f); //œrodek
-for(kat = 0.0f; kat < (2.0f*Math.PI);
-kat+=(Math.PI/32.0f))
-{
-x = 0.6f*(float)Math.sin(kat);
-y = 0.6f*(float)Math.cos(kat);
-gl.glVertex3f(x, y, -6.0f); //kolejne punkty
-}
+       gl.glBegin(GL.GL_TRIANGLES);
+       gl.glColor3f(0.5f,0.5f,0.0f);
+gl.glVertex3f(-1.0f, 1.0f, -10.0f);
+gl.glVertex3f(-2.0f,-1.0f, -10.0f);
+gl.glVertex3f( 0.0f,-1.0f, -10.0f);
+gl.glEnd();
+
+gl.glBegin(GL.GL_QUADS);
+gl.glColor3f(0.3f,0.2f,0.8f);
+gl.glVertex3f(-2.0f, -1.0f, -10.0f);
+gl.glVertex3f(0.0f, -1.0f, -10.0f);
+gl.glVertex3f(0.0f,-2.5f, -10.0f);
+gl.glVertex3f(-2.0f,-2.5f, -10.0f);
+
+gl.glEnd();
+
+gl.glBegin(GL.GL_QUADS);
+gl.glColor3f(1.0f,1.0f,1.0f);
+gl.glVertex3f(-1.8f, -1.9f, -10.1f);
+gl.glVertex3f(-1.4f, -1.9f, -10.1f);
+gl.glVertex3f(-1.4f,-2.5f, -10.1f);
+gl.glVertex3f(-1.8f,-2.5f, -10.1f);
+
 gl.glEnd();
     }
 
