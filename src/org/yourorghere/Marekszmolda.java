@@ -81,40 +81,36 @@ public class Marekszmolda implements GLEventListener {
         gl.glMatrixMode(GL.GL_MODELVIEW);
         gl.glLoadIdentity();
     }
+   public void DisplayTriangleFan(float r, float xsr, float ysr, GL gl){
+         
+        
+            float x,y,kat;
+         gl.glBegin(GL.GL_TRIANGLE_FAN);
+         gl.glVertex3f(xsr,ysr,-6.0f); //?rodek
+          for(kat = 0.0f; kat < (2.0f*Math.PI);
+          kat+=(Math.PI/32.0f))
+          {
 
-    public void display(GLAutoDrawable drawable) {
-        GL gl = drawable.getGL();
-
-        // Clear the drawing area
-        gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
-        // Reset the current matrix to the "identity"
-        gl.glLoadIdentity();
-
-       gl.glBegin(GL.GL_TRIANGLES);
-       gl.glColor3f(0.5f,0.5f,0.0f);
-gl.glVertex3f(-1.0f, 1.0f, -10.0f);
-gl.glVertex3f(-2.0f,-1.0f, -10.0f);
-gl.glVertex3f( 0.0f,-1.0f, -10.0f);
-gl.glEnd();
-
-gl.glBegin(GL.GL_QUADS);
-gl.glColor3f(0.3f,0.2f,0.8f);
-gl.glVertex3f(-2.0f, -1.0f, -10.0f);
-gl.glVertex3f(0.0f, -1.0f, -10.0f);
-gl.glVertex3f(0.0f,-2.5f, -10.0f);
-gl.glVertex3f(-2.0f,-2.5f, -10.0f);
-
-gl.glEnd();
-
-gl.glBegin(GL.GL_QUADS);
-gl.glColor3f(1.0f,1.0f,1.0f);
-gl.glVertex3f(-1.8f, -1.9f, -10.1f);
-gl.glVertex3f(-1.4f, -1.9f, -10.1f);
-gl.glVertex3f(-1.4f,-2.5f, -10.1f);
-gl.glVertex3f(-1.8f,-2.5f, -10.1f);
-
-gl.glEnd();
-    }
+         x = r*(float)Math.sin(kat)+xsr;
+         y = r*(float)Math.cos(kat)+ysr;
+          gl.glVertex3f(x, y, -6.0f); //kolejne punkty
+          }
+          gl.glEnd();
+         
+     }
+     public void display(GLAutoDrawable drawable) {
+         GL gl = drawable.getGL();
+ 
+         // Clear the drawing area
+         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
+         // Reset the current matrix to the "identity"
+         gl.glLoadIdentity();
+                 
+         DisplayTriangleFan(1.0f , 0.0f , 0.0f, gl);
+     
+          // Flush all drawing operations to the graphics card
+          gl.glFlush();
+      }
 
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
     }
