@@ -116,7 +116,7 @@ public class SimpleJOGL implements GLEventListener {
         //Tu piszemy kod tworz¹cy obiekty 3D
         gl.glBegin(GL.GL_QUADS);
 float x, y, kat;
-  
+  //
          gl.glBegin(GL.GL_TRIANGLE_FAN);
             gl.glColor3f(0.3f,0.0f,1.0f);
          gl.glVertex3f(0.0f, 0.0f, -2.0f); //?rodek
