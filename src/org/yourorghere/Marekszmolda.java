@@ -2,41 +2,39 @@ package org.yourorghere;
 
 import com.sun.opengl.util.Animator;
 import java.awt.Frame;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 
-
-
 /**
- * Marekszmolda.java <BR>
- * author: Brian Paul (converted to Java by Ron Cemer and Sven Goethel) <P>
+ * SimpleJOGL.java <BR>
+ * author: Brian Paul (converted to Java by Ron Cemer and Sven Goethel)
+ * <P>
  *
  * This version is equal to Brian Paul's version 1.2 1999/10/21
  */
 public class Marekszmolda implements GLEventListener {
 
+//statyczne pola okreœlaj¹ce rotacjê wokó³ osi X i Y
+    private static float xrot = 0.0f, yrot = 0.0f;
+
     public static void main(String[] args) {
         Frame frame = new Frame("Simple JOGL Application");
         GLCanvas canvas = new GLCanvas();
-
         canvas.addGLEventListener(new Marekszmolda());
         frame.add(canvas);
         frame.setSize(640, 480);
         final Animator animator = new Animator(canvas);
         frame.addWindowListener(new WindowAdapter() {
-
             @Override
             public void windowClosing(WindowEvent e) {
-                // Run this on another thread than the AWT event queue to
-                // make sure the call to Animator.stop() completes before
-                // exiting
+// Run this on another thread than the AWT event queue to
+// make sure the call to Animator.stop() completes before
+// exiting
                 new Thread(new Runnable() {
-
                     public void run() {
                         animator.stop();
                         System.exit(0);
@@ -44,33 +42,57 @@ public class Marekszmolda implements GLEventListener {
                 }).start();
             }
         });
-        // Center frame
+
+//Obs³uga klawiszy strza³ek
+        frame.addKeyListener(new KeyListener() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_UP) {
+                    xrot -= 1.0f;
+                }
+                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                    xrot += 1.0f;
+                }
+                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    yrot += 1.0f;
+                }
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                    yrot -= 1.0f;
+                }
+            }
+
+            public void keyReleased(KeyEvent e) {
+            }
+
+            public void keyTyped(KeyEvent e) {
+            }
+        });
+
+// Center frame
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         animator.start();
     }
 
     public void init(GLAutoDrawable drawable) {
-        // Use debug pipeline
-        // drawable.setGL(new DebugGL(drawable.getGL()));
-
+// Use debug pipeline
+// drawable.setGL(new DebugGL(drawable.getGL()));
         GL gl = drawable.getGL();
         System.err.println("INIT GL IS: " + gl.getClass().getName());
-
-        // Enable VSync
+// Enable VSync
         gl.setSwapInterval(1);
-
-        // Setup the drawing area and shading mode
+// Setup the drawing area and shading mode
         gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-        gl.glShadeModel(GL.GL_SMOOTH); // try setting this to GL_FLAT and see what happens.
+        gl.glShadeModel(GL.GL_SMOOTH);
+//wy³¹czenie wewnêtrzych stron prymitywów
+        gl.glEnable(GL.GL_CULL_FACE);
     }
 
-    public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
+    public void reshape(GLAutoDrawable drawable, int x, int y, int width,
+            int height) {
         GL gl = drawable.getGL();
         GLU glu = new GLU();
-
         if (height <= 0) { // avoid a divide by zero error!
-        
+
             height = 1;
         }
         final float h = (float) width / (float) height;
@@ -81,34 +103,45 @@ public class Marekszmolda implements GLEventListener {
         gl.glMatrixMode(GL.GL_MODELVIEW);
         gl.glLoadIdentity();
     }
-    
-    
-    public void drawTriangle(float x1, float x2,  float x3, float y1, float y2, float y3, float z, GL gl){
-    
-      gl.glBegin(GL.GL_TRIANGLES);
-         gl.glVertex3f(x3, y3, -6.0f);
-        gl.glVertex3f(x1, y1, -6.0f);
-        gl.glVertex3f(x2, y2, -6.0f);
-        gl.glEnd();
- }
-    
-  
-     public void display(GLAutoDrawable drawable) {
-         GL gl = drawable.getGL();
- 
-         // Clear the drawing area
-         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
-         // Reset the current matrix to the "identity"
-         gl.glLoadIdentity();
-                 
-        drawTriangle((float) 1.0, (float) 0.0, (float) 3.0, (float) 0.0, (float) 2.0, (float) 2.0, (float) -6.0, gl);
-     
-          // Flush all drawing operations to the graphics card
-        
-          gl.glFlush();
-      }
 
-    public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
+    public void display(GLAutoDrawable drawable) {
+        GL gl = drawable.getGL();
+// Clear the drawing area
+        gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
+// Reset the current matrix to the "identity"
+        gl.glLoadIdentity();
+        gl.glTranslatef(0.0f, 0.0f, -6.0f); //przesuniêcie o 6 jednostek
+        gl.glRotatef(xrot, 1.0f, 0.0f, 0.0f); //rotacja wokó³ osi X
+        gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokó³ osi Y
+//Tu piszemy kod tworz¹cy obiekty 3D
+        float x, y, kat;
+
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glColor3f(0.2f, 0.9f, 1.0f);
+        gl.glVertex3f(0.0f, 0.0f, -2.0f); //?rodek
+        for (kat = 0.0f; kat < (2.0f * Math.PI);
+                kat += (Math.PI / 32.0f)) {
+            x = 1.5f * (float) Math.sin(kat);
+            y = 1.5f * (float) Math.cos(kat);
+            gl.glVertex3f(x, y, 1.0f); //kolejne punkty
+        }
+        gl.glEnd();
+        gl.glBegin(GL.GL_TRIANGLE_FAN);
+        gl.glColor3f(0.9f, 1.0f, 1.0f);
+        gl.glVertex3f(0.0f, 0.0f, 1.0f); //?rodek
+        for (kat = (float) (2.0f * Math.PI); kat > 0.0f;
+                kat -= (Math.PI / 32.0f)) {
+            x = 1.5f * (float) Math.sin(kat);
+            y = 1.5f * (float) Math.cos(kat);
+            gl.glVertex3f(x, y, 1.0f); //kolejne punkty
+        }
+        gl.glEnd();
+
+// Flush all drawing operations to the graphics card
+        gl.glFlush();
+    }
+
+    public void displayChanged(GLAutoDrawable drawable, boolean modeChanged,
+            boolean deviceChanged) {
     }
 }
-
