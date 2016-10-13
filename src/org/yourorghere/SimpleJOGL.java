@@ -47,16 +47,16 @@ public class SimpleJOGL implements GLEventListener {
         frame.addKeyListener(new KeyListener() {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    xrot -= 1.0f;
+                    xrot -= 3.0f;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    xrot += 1.0f;
+                    xrot += 3.0f;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    yrot += 1.0f;
+                    yrot += 3.0f;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                    yrot -= 1.0f;
+                    yrot -= 3.0f;
                 }
             }
 
@@ -115,42 +115,41 @@ public class SimpleJOGL implements GLEventListener {
         gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokó³ osi Y
         //Tu piszemy kod tworz¹cy obiekty 3D
         gl.glBegin(GL.GL_QUADS);
-//œciana przednia
+
+        //dol
+        gl.glColor3f(1.0f, 1.0f, 1.0f);
+        gl.glVertex3f(-1.0f, -1.0f, 1.0f);
+        gl.glVertex3f(-1.0f, -1.0f, -1.0f);
+        gl.glVertex3f(1.0f, -1.0f, -1.0f);
+        gl.glVertex3f(1.0f, -1.0f, 1.0f);
+        gl.glEnd();
+        gl.glBegin(GL.GL_TRIANGLES);
+
+        //przod
         gl.glColor3f(1.0f, 0.0f, 0.0f);
         gl.glVertex3f(-1.0f, -1.0f, 1.0f);
         gl.glVertex3f(1.0f, -1.0f, 1.0f);
-        gl.glVertex3f(1.0f, 1.0f, 1.0f);
-        gl.glVertex3f(-1.0f, 1.0f, 1.0f);
-//sciana tylnia
+        gl.glVertex3f(0.0f, 1.0f, 0.0f);
+
+        //tyl
         gl.glColor3f(0.0f, 1.0f, 0.0f);
-        gl.glVertex3f(-1.0f, 1.0f, -1.0f);
-        gl.glVertex3f(1.0f, 1.0f, -1.0f);
+
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-//œciana lewa
+        gl.glVertex3f(0.0f, 1.0f, 0.0f);
+
+        //lewa
         gl.glColor3f(0.0f, 0.0f, 1.0f);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
         gl.glVertex3f(-1.0f, -1.0f, 1.0f);
-        gl.glVertex3f(-1.0f, 1.0f, 1.0f);
-        gl.glVertex3f(-1.0f, 1.0f, -1.0f);
-//œciana prawa
+        gl.glVertex3f(0.0f, 1.0f, 0.0f);
+
+        //prawa
         gl.glColor3f(1.0f, 1.0f, 0.0f);
-        gl.glVertex3f(1.0f, 1.0f, -1.0f);
-        gl.glVertex3f(1.0f, 1.0f, 1.0f);
+        gl.glVertex3f(0.0f, 1.0f, 0.0f);
         gl.glVertex3f(1.0f, -1.0f, 1.0f);
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
-//œciana dolna
-        gl.glColor3f(1.0f, 0.0f, 1.0f);
-        gl.glVertex3f(-1.0f, -1.0f, 1.0f);
-        gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-        gl.glVertex3f(1.0f, -1.0f, -1.0f);
-        gl.glVertex3f(1.0f, -1.0f, 1.0f);
-//sciana gorna
-        gl.glColor3f(1.5f, 3.3f, 1.0f);
-        gl.glVertex3f(-1.0f, 1.0f, 1.0f);
-        gl.glVertex3f(1.0f, 1.0f, 1.0f);
-        gl.glVertex3f(1.0f, 1.0f, -1.0f);
-        gl.glVertex3f(-1.0f, 1.0f, -1.0f);
+
         gl.glEnd();
 
         // Flush all drawing operations to the graphics card
