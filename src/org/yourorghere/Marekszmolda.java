@@ -3,7 +3,6 @@ package org.yourorghere;
 
 
 
-
 import com.sun.opengl.util.Animator;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
@@ -245,6 +244,31 @@ public class Marekszmolda implements GLEventListener {
         }
     }
 
+    private float[] WyznaczNormalna(float[] punkty, int ind1, int ind2, int ind3) {
+        float[] norm = new float[3];
+        float[] wektor0 = new float[3];
+        float[] wektor1 = new float[3];
+
+        for (int i = 0; i < 3; i++) {
+            wektor0[i] = punkty[i + ind1] - punkty[i + ind2];
+            wektor1[i] = punkty[i + ind2] - punkty[i + ind3];
+        }
+
+        norm[0] = wektor0[1] * wektor1[2] - wektor0[2] * wektor1[1];
+        norm[1] = wektor0[2] * wektor1[0] - wektor0[0] * wektor1[2];
+        norm[2] = wektor0[0] * wektor1[1] - wektor0[1] * wektor1[0];
+        float d
+                = (float) Math.sqrt((norm[0] * norm[0]) + (norm[1] * norm[1]) + (norm[2] * norm[2]));
+        if (d == 0.0f) {
+            d = 1.0f;
+        }
+        norm[0] /= d;
+        norm[1] /= d;
+        norm[2] /= d;
+
+        return norm;
+    }
+
     public void display(GLAutoDrawable drawable) {
 //Tworzenie obiektu
         GL gl = drawable.getGL();
@@ -256,54 +280,61 @@ public class Marekszmolda implements GLEventListener {
         gl.glTranslatef(0.0f, 0.0f, -6.0f); //przesuni?cie o 6 jednostek
         gl.glRotatef(xrot, 1.0f, 0.0f, 0.0f); //rotacja wokó? osi X
         gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokó? osi Y
+        // 
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_AMBIENT, ambientLight, 0); //swiat?o otaczaj?ce
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_DIFFUSE, diffuseLight, 0); //?wiat?o rozproszone
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_SPECULAR, specular, 0); //?wiat?o odbite
 
         gl.glBegin(GL.GL_QUADS);
-        gl.glBegin(GL.GL_QUADS);
-//?ciana przednia
-        gl.glColor3f(1.0f, 1.0f, 1.0f);
-        gl.glNormal3f(0.0f, 0.0f, 1.0f);
-        gl.glVertex3f(-1.0f, -1.0f, 1.0f);
-        gl.glVertex3f(1.0f, -1.0f, 1.0f);
-        gl.glVertex3f(1.0f, 1.0f, 1.0f);
-        gl.glVertex3f(-1.0f, 1.0f, 1.0f);
-//sciana tylnia
         gl.glColor3f(0.0f, 1.0f, 1.0f);
-        gl.glNormal3f(0.0f, 0.0f, -1.0f);
-        gl.glVertex3f(-1.0f, 1.0f, -1.0f);
-        gl.glVertex3f(1.0f, 1.0f, -1.0f);
-        gl.glVertex3f(1.0f, -1.0f, -1.0f);
-        gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-//?ciana lewa
-        gl.glColor3f(1.0f, 1.0f, 0.0f);
-        gl.glNormal3f(-1.0f, 0.0f, 0.0f);
-        gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-        gl.glVertex3f(-1.0f, -1.0f, 1.0f);
-        gl.glVertex3f(-1.0f, 1.0f, 1.0f);
-        gl.glVertex3f(-1.0f, 1.0f, -1.0f);
-//?ciana prawa
-        gl.glColor3f(1.0f, 0.0f, 1.0f);
-        gl.glNormal3f(1.0f, 0.0f, 0.0f);
-        gl.glVertex3f(1.0f, 1.0f, -1.0f);
-        gl.glVertex3f(1.0f, 1.0f, 1.0f);
-        gl.glVertex3f(1.0f, -1.0f, 1.0f);
-        gl.glVertex3f(1.0f, -1.0f, -1.0f);
-//?ciana dolna
-        gl.glColor3f(0.0f, 1.0f, 0.0f);
-        gl.glNormal3f(0.0f, -1.0f, 0.0f);
         gl.glVertex3f(-1.0f, -1.0f, 1.0f);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
         gl.glVertex3f(1.0f, -1.0f, 1.0f);
-//?ciana górna
-        gl.glColor3f(0.0f, 0.0f, 1.0f);
-        gl.glNormal3f(0.0f, 1.0f, 0.0f);
-        gl.glVertex3f(1.0f, 1.0f, -1.0f);
-        gl.glVertex3f(-1.0f, 1.0f, -1.0f);
-        gl.glVertex3f(-1.0f, 1.0f, 1.0f);
-        gl.glVertex3f(1.0f, 1.0f, 1.0f);
+        gl.glEnd();
+        gl.glBegin(GL.GL_TRIANGLES);
+
+        float[] scianka1 = {-1.0f, -1.0f, 1.0f, 
+            1.0f, -1.0f, 1.0f, 
+            0.0f, 1.0f, 0.0f}; 
+        float[] normalna1 = WyznaczNormalna(scianka1, 0, 3, 6);
+              gl.glColor3f(0.0f, 1.0f, 0.0f);
+        gl.glNormal3fv(normalna1, 0);
+        gl.glVertex3fv(scianka1, 0);
+        gl.glVertex3fv(scianka1, 3);
+        gl.glVertex3fv(scianka1, 6);
+
+        float[] scianka2 = {1.0f, -1.0f, -1.0f, 
+            -1.0f, -1.0f, -1.0f, 
+            0.0f, 1.0f, 0.0f}; 
+        float[] normalna2 = WyznaczNormalna(scianka2, 0, 3, 6);
+
+        gl.glNormal3fv(normalna2, 0);
+        gl.glVertex3fv(scianka2, 0); 
+        gl.glVertex3fv(scianka2, 3);
+        gl.glVertex3fv(scianka2, 6); 
+
+           float[] scianka3 = {-1.0f, -1.0f, -1.0f, 
+            -1.0f, -1.0f, 1.0f, 
+            0.0f, 1.0f, 0.0f}; 
+        float[] normalna3 = WyznaczNormalna(scianka3, 0, 3, 6);
+
+        gl.glNormal3fv(normalna3, 0);
+        gl.glVertex3fv(scianka3, 0); 
+        gl.glVertex3fv(scianka3, 3); 
+        gl.glVertex3fv(scianka3, 6); 
+        
+        float[] scianka4 = {1.0f, -1.0f, 1.0f, 
+            1.0f, -1.0f, -1.0f, 
+            0.0f, 1.0f, 0.0f}; 
+        float[] normalna4 = WyznaczNormalna(scianka4, 0, 3, 6);
+
+        gl.glNormal3fv(normalna4, 0);
+        gl.glVertex3fv(scianka4, 0); 
+        gl.glVertex3fv(scianka4, 3);
+        gl.glVertex3fv(scianka4, 6);
+
+  
         gl.glEnd();
 
         //Wykonanie wszystkich operacji znajduj?cych si? w buforze
