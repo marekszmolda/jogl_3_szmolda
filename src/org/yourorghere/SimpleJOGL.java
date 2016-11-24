@@ -26,6 +26,7 @@ public class SimpleJOGL implements GLEventListener {
     static float specular[] = {1.0f, 1.0f, 1.0f, 1.0f}; //?wiat?o odbite
     static float lightPos[] = {0.0f, 150.0f, 150.0f, 1.0f};//pozycja ?wiat?a
     static int inf = 0;
+    static float licznik =0.1f;
 
     public static void main(String[] args) {
         Frame frame = new Frame("Simple JOGL Application");
@@ -68,7 +69,7 @@ public class SimpleJOGL implements GLEventListener {
                 }
 
                 if (e.getKeyCode() == KeyEvent.VK_NUMPAD1) {
-                    koparka.kond += (1.5f);
+                    koparka.kond += (0.5f);
 
                     if (koparka.kond > 60.0f) {
                         koparka.kond = 60.0f;
@@ -77,62 +78,62 @@ public class SimpleJOGL implements GLEventListener {
                 }
 
                 if (e.getKeyCode() == KeyEvent.VK_NUMPAD2) {
-                    koparka.kond -= (1.5f);
+                    koparka.kond -= (0.5f);
                     if (koparka.kond < -60.0f) {
                         koparka.kond = -60.0f;
                     }
                 }
 
                 if (e.getKeyCode() == KeyEvent.VK_NUMPAD3) {
-                    koparka.kond2 += (1.5f);
-                    
+                    koparka.kond2 += (0.5f);
+
                     if (koparka.kond2 > 40.0f) {
                         koparka.kond2 = 40.0f;
                     }
                 }
 
                 if (e.getKeyCode() == KeyEvent.VK_NUMPAD4) {
-                    koparka.kond2 -= (1.5f);
-                    
-                if (koparka.kond2 < -120.0f) {
+                    koparka.kond2 -= (0.5f);
+
+                    if (koparka.kond2 < -120.0f) {
                         koparka.kond2 = -120.0f;
                     }
                 }
 
                 if (e.getKeyCode() == KeyEvent.VK_NUMPAD5) {
-                    koparka.kond3 += (1.5f);
-                    
+                    koparka.kond3 += (0.5f);
+
                     if (koparka.kond3 > 10.0f) {
                         koparka.kond3 = 10.0f;
                     }
-                    
+
                 }
 
                 if (e.getKeyCode() == KeyEvent.VK_NUMPAD6) {
-                    koparka.kond3 -= (1.5f);
-                    
-                    if (koparka.kond3 < -60.0f) {
-                        koparka.kond3 = -60.0f;
+                    koparka.kond3 -= (0.5f);
+
+                    if (koparka.kond3 < -120.0f) {
+                        koparka.kond3 = -120.0f;
                     }
-                    
+
                 }
 
                 if (e.getKeyCode() == KeyEvent.VK_NUMPAD7) {
-                    koparka.kond4 += (1.5f);
-                    
-                     if (koparka.kond4 > 55.0f) {
+                    koparka.kond4 += (0.5f);
+
+                    if (koparka.kond4 > 55.0f) {
                         koparka.kond4 = 55.0f;
                     }
-                    
+
                 }
 
                 if (e.getKeyCode() == KeyEvent.VK_NUMPAD8) {
-                    koparka.kond4 -= (1.5f);
-                    
-                     if (koparka.kond4 < -55.0f) {
+                    koparka.kond4 -= (0.5f);
+
+                    if (koparka.kond4 < -55.0f) {
                         koparka.kond4 = -55.0f;
                     }
-                    
+
                 }
 
                 if (e.getKeyChar() == 'q') {
@@ -234,6 +235,24 @@ public class SimpleJOGL implements GLEventListener {
 
     public void display(GLAutoDrawable drawable) {
         GL gl = drawable.getGL();
+
+        
+        
+        koparka.kond +=licznik;
+        if (koparka.kond < -60.0f) {
+            koparka.kond = -60.0f;
+        licznik*=(-1);
+        }
+
+        
+       
+
+        if (koparka.kond > 60.0f) {
+            
+       licznik*=(-1); }
+
+        
+      
 
         // Clear the drawing area
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
