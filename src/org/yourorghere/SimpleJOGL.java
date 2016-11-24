@@ -16,17 +16,15 @@ import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 
-
-
-
 public class SimpleJOGL implements GLEventListener {
+
     static Koparka koparka;
-    
+
     private static float xrot = 0.0f, yrot = 0.0f;
-    static float ambientLight[] = { 0.3f, 0.3f, 0.3f, 1.0f };//swiat?o otaczajšce
-    static float diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };//?wiat?o rozproszone
-    static float specular[] = { 1.0f, 1.0f, 1.0f, 1.0f}; //?wiat?o odbite
-    static float lightPos[] = { 0.0f, 150.0f, 150.0f, 1.0f };//pozycja ?wiat?a
+    static float ambientLight[] = {0.3f, 0.3f, 0.3f, 1.0f};//swiat?o otaczajšce
+    static float diffuseLight[] = {0.7f, 0.7f, 0.7f, 1.0f};//?wiat?o rozproszone
+    static float specular[] = {1.0f, 1.0f, 1.0f, 1.0f}; //?wiat?o odbite
+    static float lightPos[] = {0.0f, 150.0f, 150.0f, 1.0f};//pozycja ?wiat?a
     static int inf = 0;
 
     public static void main(String[] args) {
@@ -53,38 +51,86 @@ public class SimpleJOGL implements GLEventListener {
                 }).start();
             }
         });
-        frame.addKeyListener(new KeyListener()
-        {
-            public void keyPressed(KeyEvent e)
-            {
-                if(e.getKeyCode() == KeyEvent.VK_UP)
-                xrot -= 2.0f;
-                if(e.getKeyCode() == KeyEvent.VK_DOWN)
-                xrot +=2.0f;
-                if(e.getKeyCode() == KeyEvent.VK_RIGHT)
-                yrot += 2.0f;
-                if(e.getKeyCode() == KeyEvent.VK_LEFT)
-                yrot -=2.0f;
+        frame.addKeyListener(new KeyListener() {
+            public void keyPressed(KeyEvent e) {
+
+                if (e.getKeyCode() == KeyEvent.VK_UP) {
+                    xrot -= 2.0f;
+                }
+                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                    xrot += 2.0f;
+                }
+                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    yrot += 2.0f;
+                }
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                    yrot -= 2.0f;
+                }
+
+                if (e.getKeyCode() == KeyEvent.VK_NUMPAD1) {
+                    koparka.kond += (1.5f);
+                }
+                if (e.getKeyCode() == KeyEvent.VK_NUMPAD2) {
+                    koparka.kond -= (1.5f);
+                }
                 
-                if(e.getKeyChar() == 'q')
-                    ambientLight=new float[] {ambientLight[0]-0.1f, ambientLight[0]-0.1f, ambientLight[0]-0.1f, 1};
-                if(e.getKeyChar() == 'w')
-                    ambientLight=new float[] {ambientLight[0]+0.1f, ambientLight[0]+0.1f, ambientLight[0]+0.1f, 1};
-                if(e.getKeyChar() == 'a')
-                    diffuseLight=new float[] {diffuseLight[0]-0.1f, diffuseLight[0]-0.1f, diffuseLight[0]-0.1f, 1};
-                if(e.getKeyChar() == 's')
-                    diffuseLight=new float[] {diffuseLight[0]+0.1f, diffuseLight[0]+0.1f, diffuseLight[0]+0.1f, 1};
-                if(e.getKeyChar() == 'z')
-                    specular=new float[] {specular[0]-0.1f, specular[0]-0.1f, specular[0]-0.1f, 1};
-                if(e.getKeyChar() == 'x')
-                    specular=new float[] {specular[0]+0.1f, specular[0]+0.1f, specular[0]+0.1f, 1};
-                if(e.getKeyChar() == 'n')
-                    lightPos[3]=0;
-                if(e.getKeyChar() == 'm')
-                    lightPos[3]=1;
+                if (e.getKeyCode() == KeyEvent.VK_NUMPAD3) {
+                    koparka.kond2 += (1.5f);
+                }
+
+                if (e.getKeyCode() == KeyEvent.VK_NUMPAD4) {
+                    koparka.kond2 -= (1.5f);
+                }
+                
+                if (e.getKeyCode() == KeyEvent.VK_NUMPAD5) {
+                    koparka.kond3 += (1.5f);
+                }
+
+                if (e.getKeyCode() == KeyEvent.VK_NUMPAD6) {
+                    koparka.kond3 -= (1.5f);
+                }
+
+                if (e.getKeyCode() == KeyEvent.VK_NUMPAD7) {
+                    koparka.kond4 += (1.5f);
+                }
+
+                if (e.getKeyCode() == KeyEvent.VK_NUMPAD8) {
+                    koparka.kond4 -= (1.5f);
+                }
+
+
+
+                if (e.getKeyChar() == 'q') {
+                    ambientLight = new float[]{ambientLight[0] - 0.1f, ambientLight[0] - 0.1f, ambientLight[0] - 0.1f, 1};
+                }
+                if (e.getKeyChar() == 'w') {
+                    ambientLight = new float[]{ambientLight[0] + 0.1f, ambientLight[0] + 0.1f, ambientLight[0] + 0.1f, 1};
+                }
+                if (e.getKeyChar() == 'a') {
+                    diffuseLight = new float[]{diffuseLight[0] - 0.1f, diffuseLight[0] - 0.1f, diffuseLight[0] - 0.1f, 1};
+                }
+                if (e.getKeyChar() == 's') {
+                    diffuseLight = new float[]{diffuseLight[0] + 0.1f, diffuseLight[0] + 0.1f, diffuseLight[0] + 0.1f, 1};
+                }
+                if (e.getKeyChar() == 'z') {
+                    specular = new float[]{specular[0] - 0.1f, specular[0] - 0.1f, specular[0] - 0.1f, 1};
+                }
+                if (e.getKeyChar() == 'x') {
+                    specular = new float[]{specular[0] + 0.1f, specular[0] + 0.1f, specular[0] + 0.1f, 1};
+                }
+                if (e.getKeyChar() == 'n') {
+                    lightPos[3] = 0;
+                }
+                if (e.getKeyChar() == 'm') {
+                    lightPos[3] = 1;
+                }
             }
-            public void keyReleased(KeyEvent e){}
-            public void keyTyped(KeyEvent e){}
+
+            public void keyReleased(KeyEvent e) {
+            }
+
+            public void keyTyped(KeyEvent e) {
+            }
         });
         // Center frame
         frame.setLocationRelativeTo(null);
@@ -93,11 +139,9 @@ public class SimpleJOGL implements GLEventListener {
     }
 
     public void init(GLAutoDrawable drawable) {
-        
-        koparka = new Koparka();
+
         // Use debug pipeline
         // drawable.setGL(new DebugGL(drawable.getGL()));
-
         GL gl = drawable.getGL();
         System.err.println("INIT GL IS: " + gl.getClass().getName());
 
@@ -108,40 +152,40 @@ public class SimpleJOGL implements GLEventListener {
         gl.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         gl.glShadeModel(GL.GL_SMOOTH); // try setting this to GL_FLAT and see what happens.
         gl.glEnable(GL.GL_CULL_FACE);
-        
+
         //warto?ci sk?adowe o?wietlenia i koordynaty ?ród?a ?wiat?a
-        float ambientLight[] = { 0.3f, 0.3f, 0.3f, 1.0f };//swiat?o otaczajšce
-        float diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };//?wiat?o rozproszone
-        float specular[] = { 1.0f, 1.0f, 1.0f, 1.0f}; //?wiat?o odbite
-        float lightPos[] = { 0.0f, 150.0f, 150.0f, 1.0f };//pozycja ?wiat?a
+        float ambientLight[] = {0.3f, 0.3f, 0.3f, 1.0f};//swiat?o otaczajšce
+        float diffuseLight[] = {0.7f, 0.7f, 0.7f, 1.0f};//?wiat?o rozproszone
+        float specular[] = {1.0f, 1.0f, 1.0f, 1.0f}; //?wiat?o odbite
+        float lightPos[] = {0.0f, 150.0f, 150.0f, 1.0f};//pozycja ?wiat?a
         //(czwarty parametr okre?la odleg?o?? ?ród?a:
         //0.0f-niesko?czona; 1.0f-okre?lona przez pozosta?e parametry)
         gl.glEnable(GL.GL_LIGHTING); //uaktywnienie o?wietlenia
         //ustawienie parametrów ?ród?a ?wiat?a nr. 0
-        gl.glLightfv(GL.GL_LIGHT0,GL.GL_AMBIENT,ambientLight,0); //swiat?o otaczajšce
-        gl.glLightfv(GL.GL_LIGHT0,GL.GL_DIFFUSE,diffuseLight,0); //?wiat?o rozproszone
-        gl.glLightfv(GL.GL_LIGHT0,GL.GL_SPECULAR,specular,0); //?wiat?o odbite
-        gl.glLightfv(GL.GL_LIGHT0,GL.GL_POSITION,lightPos,0); //pozycja ?wiat?a
+        gl.glLightfv(GL.GL_LIGHT0, GL.GL_AMBIENT, ambientLight, 0); //swiat?o otaczajšce
+        gl.glLightfv(GL.GL_LIGHT0, GL.GL_DIFFUSE, diffuseLight, 0); //?wiat?o rozproszone
+        gl.glLightfv(GL.GL_LIGHT0, GL.GL_SPECULAR, specular, 0); //?wiat?o odbite
+        gl.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, lightPos, 0); //pozycja ?wiat?a
         gl.glEnable(GL.GL_LIGHT0); //uaktywnienie ?ród?a ?wiat?a nr. 0
         gl.glEnable(GL.GL_COLOR_MATERIAL); //uaktywnienie ?ledzenia kolorów
         //kolory b?dš ustalane za pomocš glColor
         gl.glColorMaterial(GL.GL_FRONT, GL.GL_AMBIENT_AND_DIFFUSE);
         //Ustawienie jasno?ci i odblaskowo?ci obiektów
-        float specref[] = { 1.0f, 1.0f, 1.0f, 1.0f }; //parametry odblaskowo?ci
-        gl.glMaterialfv(GL.GL_FRONT, GL.GL_SPECULAR,specref,0);
-        
-        gl.glMateriali(GL.GL_FRONT,GL.GL_SHININESS,128);
-        
+        float specref[] = {1.0f, 1.0f, 1.0f, 1.0f}; //parametry odblaskowo?ci
+        gl.glMaterialfv(GL.GL_FRONT, GL.GL_SPECULAR, specref, 0);
+
+        gl.glMateriali(GL.GL_FRONT, GL.GL_SHININESS, 128);
+
         gl.glEnable(GL.GL_DEPTH_TEST); //nie jest wa?na odleg?o?? tylko kolejno?? wstawiania
-        
+        koparka = new Koparka();
     }
 
-   public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
+    public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
         GL gl = drawable.getGL();
         GLU glu = new GLU();
 
         if (height <= 0) { // avoid a divide by zero error!
-        
+
             height = 1;
         }
         final float h = (float) width / (float) height;
@@ -152,30 +196,29 @@ public class SimpleJOGL implements GLEventListener {
         gl.glMatrixMode(GL.GL_MODELVIEW);
         gl.glLoadIdentity();
     }
-    
 
     public void display(GLAutoDrawable drawable) {
         GL gl = drawable.getGL();
 
         // Clear the drawing area
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
-       
+
         gl.glLoadIdentity();
         gl.glTranslatef(0.0f, 0.0f, -6.0f); //przesuni?cie o 6 jednostek
         gl.glRotatef(xrot, 1.0f, 0.0f, 0.0f); //rotacja wokó? osi X
         gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokó? osi Y
-        gl.glLightfv(GL.GL_LIGHT0,GL.GL_AMBIENT,ambientLight,inf); //swiat?o otaczajšce
-        gl.glLightfv(GL.GL_LIGHT0,GL.GL_DIFFUSE,diffuseLight,inf); //?wiat?o rozproszone
-        gl.glLightfv(GL.GL_LIGHT0,GL.GL_SPECULAR,specular,inf); //?wiat?o odbite
-        gl.glLightfv(GL.GL_LIGHT0,GL.GL_POSITION,lightPos,inf); //pozycja ?wiat?a
+        gl.glLightfv(GL.GL_LIGHT0, GL.GL_AMBIENT, ambientLight, inf); //swiat?o otaczajšce
+        gl.glLightfv(GL.GL_LIGHT0, GL.GL_DIFFUSE, diffuseLight, inf); //?wiat?o rozproszone
+        gl.glLightfv(GL.GL_LIGHT0, GL.GL_SPECULAR, specular, inf); //?wiat?o odbite
+        gl.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, lightPos, inf); //pozycja ?wiat?a
        /* 
-        gl.glLightfv(GL.GL_LIGHT1,GL.GL_AMBIENT,ambientLight,inf); //swiat?o otaczajšce
-        gl.glLightfv(GL.GL_LIGHT1,GL.GL_DIFFUSE,diffuseLight,inf); //?wiat?o rozproszone
-        gl.glLightfv(GL.GL_LIGHT1,GL.GL_SPECULAR,specular,inf); //?wiat?o odbite
-        gl.glLightfv(GL.GL_LIGHT1,GL.GL_POSITION,lightPos,inf); //pozycja ?wiat?a
-        */
+         gl.glLightfv(GL.GL_LIGHT1,GL.GL_AMBIENT,ambientLight,inf); //swiat?o otaczajšce
+         gl.glLightfv(GL.GL_LIGHT1,GL.GL_DIFFUSE,diffuseLight,inf); //?wiat?o rozproszone
+         gl.glLightfv(GL.GL_LIGHT1,GL.GL_SPECULAR,specular,inf); //?wiat?o odbite
+         gl.glLightfv(GL.GL_LIGHT1,GL.GL_POSITION,lightPos,inf); //pozycja ?wiat?a
+         */
         koparka.Rysuj(gl);
-        
+
 //            gl.glPushMatrix();
 //            for(int i=0; i<10; i++){
 //                gl.glPushMatrix();
@@ -194,27 +237,27 @@ public class SimpleJOGL implements GLEventListener {
 //            }
 //        gl.glFlush();
     }
-    
-    public void print(GL gl){
 
-                    gl.glColor3f(0.10f,0.35f,0.13f);
-                    gl.glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
-                    gl.glTranslatef(0.0f,0.0f,-1.0f);
-                    gl.glScalef(0.8f, 0.8f, 0.8f);
-                    stozek(gl);
-                    gl.glColor3f(0.20f,0.55f,0.13f);
-                    gl.glTranslatef(0.0f,0.0f,1.0f);
-                    gl.glScalef(1.2f, 1.2f, 1.2f);
-                    stozek(gl);
-                    gl.glColor3f(0.20f,0.55f,0.13f);
-                    gl.glTranslatef(0.0f,0.0f,1.0f);
-                    gl.glScalef(1.2f, 1.2f, 1.2f);
-                    stozek(gl);
-                    gl.glScalef(0.7f, 0.7f, 0.7f);
-                    gl.glTranslatef(0.0f,0.0f,1.0f);
-                    gl.glColor3f(0.50f,0.24f,0.08f);
-                    walec(gl);
-                }
+    public void print(GL gl) {
+
+        gl.glColor3f(0.10f, 0.35f, 0.13f);
+        gl.glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
+        gl.glTranslatef(0.0f, 0.0f, -1.0f);
+        gl.glScalef(0.8f, 0.8f, 0.8f);
+        stozek(gl);
+        gl.glColor3f(0.20f, 0.55f, 0.13f);
+        gl.glTranslatef(0.0f, 0.0f, 1.0f);
+        gl.glScalef(1.2f, 1.2f, 1.2f);
+        stozek(gl);
+        gl.glColor3f(0.20f, 0.55f, 0.13f);
+        gl.glTranslatef(0.0f, 0.0f, 1.0f);
+        gl.glScalef(1.2f, 1.2f, 1.2f);
+        stozek(gl);
+        gl.glScalef(0.7f, 0.7f, 0.7f);
+        gl.glTranslatef(0.0f, 0.0f, 1.0f);
+        gl.glColor3f(0.50f, 0.24f, 0.08f);
+        walec(gl);
+    }
 
     public void walec(GL gl) {
 //wywo?ujemy automatyczne normalizowanie normalnych
@@ -275,7 +318,6 @@ public class SimpleJOGL implements GLEventListener {
         }
         gl.glEnd();
     }
-
 
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
     }
