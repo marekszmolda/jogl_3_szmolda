@@ -488,7 +488,7 @@ public class SimpleJOGL implements GLEventListener {
         }
         gl.glEnd();
 
-    }
+    }//
 
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
     }
