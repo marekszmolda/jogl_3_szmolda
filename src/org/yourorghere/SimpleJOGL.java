@@ -322,7 +322,7 @@ public class SimpleJOGL implements GLEventListener {
 //        }
          gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
         gl.glBegin(GL.GL_QUADS);
-//?ciana przednia
+////?ciana przednia
         gl.glTexCoord2f(1.0f, 1.0f);
         gl.glVertex3f(-1.0f, -1.0f, 1.0f);
         gl.glTexCoord2f(0.0f, 1.0f);
@@ -332,7 +332,7 @@ public class SimpleJOGL implements GLEventListener {
         gl.glTexCoord2f(1.0f, 0.0f);
         gl.glVertex3f(-1.0f, 1.0f, 1.0f);
 //sciana tylnia
-
+        
         gl.glTexCoord2f(1.0f, 1.0f);
         gl.glVertex3f(-1.0f, 1.0f, -1.0f);
         gl.glTexCoord2f(0.0f, 1.0f);
@@ -341,24 +341,26 @@ public class SimpleJOGL implements GLEventListener {
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
         gl.glTexCoord2f(1.0f, 0.0f);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-        gl.glEnd();
 //?ciana lewa
-        gl.glBindTexture(GL.GL_TEXTURE_2D, t2.getTextureObject());
+        gl.glEnd();
+         gl.glBindTexture(GL.GL_TEXTURE_2D, t2.getTextureObject());
         gl.glBegin(GL.GL_QUADS);
-        gl.glTexCoord2f(1.0f, 1.0f);
+        gl.glTexCoord2f(2.0f, 2.0f);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
-        gl.glTexCoord2f(0.0f, 1.0f);
+        gl.glTexCoord2f(0.0f, 2.0f);
         gl.glVertex3f(-1.0f, -1.0f, 1.0f);
         gl.glTexCoord2f(0.0f, 0.0f);
         gl.glVertex3f(-1.0f, 1.0f, 1.0f);
-        gl.glTexCoord2f(1.0f, 0.0f);
+        gl.glTexCoord2f(2.0f, 0.0f);
         gl.glVertex3f(-1.0f, 1.0f, -1.0f);
 ////?ciana prawa
-        gl.glTexCoord2f(1.0f, 1.0f);
+          
+         gl.glTexCoord2f(0.0f, 0.0f);
         gl.glVertex3f(1.0f, 1.0f, -1.0f);
         gl.glTexCoord2f(0.0f, 1.0f);
-        gl.glVertex3f(1.0f, 1.0f, 1.0f);
-        gl.glTexCoord2f(0.0f, 0.0f);
+        gl.glVertex3f(1.0f, 1.0f, 1.0f); 
+        gl.glTexCoord2f(1.0f, 1.0f);
+        
         gl.glVertex3f(1.0f, -1.0f, 1.0f);
         gl.glTexCoord2f(1.0f, 0.0f);
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
