@@ -320,6 +320,7 @@ public class SimpleJOGL implements GLEventListener {
 //        gl.glPopMatrix();
 //        gl.glTranslatef(0.0f,1.8f,0.0f);
 //        }
+         gl.glBindTexture(GL.GL_TEXTURE_2D, t1.getTextureObject());
         gl.glBegin(GL.GL_QUADS);
 //?ciana przednia
         gl.glTexCoord2f(1.0f, 1.0f);
@@ -340,8 +341,10 @@ public class SimpleJOGL implements GLEventListener {
         gl.glVertex3f(1.0f, -1.0f, -1.0f);
         gl.glTexCoord2f(1.0f, 0.0f);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
+        gl.glEnd();
 //?ciana lewa
-
+        gl.glBindTexture(GL.GL_TEXTURE_2D, t2.getTextureObject());
+        gl.glBegin(GL.GL_QUADS);
         gl.glTexCoord2f(1.0f, 1.0f);
         gl.glVertex3f(-1.0f, -1.0f, -1.0f);
         gl.glTexCoord2f(0.0f, 1.0f);
@@ -351,7 +354,6 @@ public class SimpleJOGL implements GLEventListener {
         gl.glTexCoord2f(1.0f, 0.0f);
         gl.glVertex3f(-1.0f, 1.0f, -1.0f);
 ////?ciana prawa
-
         gl.glTexCoord2f(1.0f, 1.0f);
         gl.glVertex3f(1.0f, 1.0f, -1.0f);
         gl.glTexCoord2f(0.0f, 1.0f);
