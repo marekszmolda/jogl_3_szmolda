@@ -299,11 +299,7 @@ public class SimpleJOGL implements GLEventListener {
             gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
         }
         // Reset the current matrix to the "identity"
-        gl.glLoadIdentity();
-        gl.glTranslatef(0.0f, 0.0f, -5.0f); //przesuni?cie o 6 jednostek
-        gl.glRotatef(xrot, 1.0f, 0.0f, 0.0f); //rotacja wokó? osi X
-        gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokó? osi Y
-
+     
         gl.glEnable(GL.GL_LIGHTING); //uaktywnienie o?wietlenia
         //ustawienie parametrów ?ród?a ?wiat?a nr. 0
         gl.glLightfv(GL.GL_LIGHT0, GL.GL_AMBIENT, ambientLight, 0); //swiat?o otaczaj?ce
@@ -313,14 +309,27 @@ public class SimpleJOGL implements GLEventListener {
         gl.glEnable(GL.GL_LIGHT0); //uaktywnienie ?ród?a ?wiat?a nr. 0
         gl.glEnable(GL.GL_COLOR_MATERIAL);
    
-        gl.glTranslatef(0.0f, 80.0f, -5.0f);
+        gl.glTranslatef(0.0f, 95.0f, -5.0f);
 
                 gl.glTranslatef(x, 0.0f, z);
 
                 
         Rysuj(gl, t1, t2, t3);
+        
+          
+        gl.glTranslatef(0.0f, -96.5f, 0.0f);
+        gl.glScalef(1.5f, 1.5f, 1.5f);  
 koparka.Rysuj(gl);
-        // drzewko(gl);
+
+   gl.glLoadIdentity();
+        gl.glTranslatef(0.0f, 0.0f, -5.0f); //przesuni?cie o 6 jednostek
+        gl.glRotatef(xrot, 1.0f, 0.0f, 0.0f); //rotacja wokó? osi X
+        gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f); //rotacja wokó? osi Y
+
+        
+        
+         
+// drzewko(gl);
         //  for(int i=0; i<10 ;i++)
         //  {
         //      drzewko(gl);
